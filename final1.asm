@@ -21,4 +21,4 @@ rdy_wait:
         lw	$t1, 0($t0)
 	andi    $t1, $t1, 0x0001 	# test RC register has 1 in LSB
 	beq	$t1, $zero, rd_wait     # if LSB is 0, branch rd_wait
-	lw	$s0, 4($t0)		# if LSB is 1, read a character from I/O device
+	lw	$s0, 4($t0)             # if LSB is 1, read a character from I/O device
