@@ -15,9 +15,9 @@ x:	.word 100
         .globl  main
 
 main:
-	lw 	$t9, num  		# three character
-	lw	$t8, x
-	ori	$s1, $zero, 0		# Load 12 into $t2
+	lw 	$t9, num  		# three characters
+	lw	$t8, x                  # Initial value of 100
+	ori	$s1, $zero, 0		# Load 10 into $s1
 
 	lui 	$t0, 0xffff 		# lui : load upper immediate
 
