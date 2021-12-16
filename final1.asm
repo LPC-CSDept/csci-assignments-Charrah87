@@ -29,20 +29,20 @@ rdy_wait:
 
 	sub 	$s0, $s0, 48 		# subtract ASCII code for '0' ; '3' - 			      	      # '0' = 3
 
-	sub 	$t9, $t9, 1
-	beq 	$t9, $zero, readall
-	mul	$s0, $s0, $t8
+	sub 	$t9, $t9, 1		# subtract 1 from counter
+	beq 	$t9, $zero, readall	# Branch to final add+print when =0
+	mul	$s0, $s0, $t8		# Multiply by $t8
 	nop
-	add	$s1, $s0, $s1
-	div	$t8, $t8, 10
+	add	$s1, $s0, $s1		# Add $s1 and $s0 together
+	div	$t8, $t8, 10		# Divide > 100 > 10 > 1
 	nop
 
 	b 	rdy_wait		# branch back to rdy_wait
 
 
 readall:
-	add 	$a0, $s1, $s0
-	li 	$v0, 1
+	add 	$a0, $s1, $s0		# Add the final digit and previous sum
+	li 	$v0, 1			# Print values
 	syscall 
-	li 	$v0, 10
+	li 	$v0, 10			# Exit program
 	syscall
