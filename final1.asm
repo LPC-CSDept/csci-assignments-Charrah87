@@ -23,11 +23,11 @@ main:
 
 rdy_wait:
 	lw	$t1, 0($t0)
-	andi 	$t1, $t1, 0x0001 	# test the Receiver control register 				     # has 1 in LSB # ready?
+	andi 	$t1, $t1, 0x0001 	# test the Receiver control register 				     
 	beq	$t1, $zero, rdy_wait 	# if LSB is 0, branch rdy_wait
 	lw	$s0, 4($t0)		# if LSB is 1, read a character from IO
 
-	sub 	$s0, $s0, 48 		# subtract ASCII code for '0' ; '3' - 			      	      # '0' = 3
+	sub 	$s0, $s0, 48 		# subtract ASCII code for '0'			      	      
 
 	sub 	$t9, $t9, 1		# subtract 1 from counter
 	beq 	$t9, $zero, readall	# Branch to final add+print when =0
