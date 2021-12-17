@@ -23,5 +23,15 @@ main:
 here:   	j here     		        # stay here forever     
 		
 exit:
-		    li 	$v0, 10     	# exit, if it ever comes here     
+		    li 	    $v0, 10     	# exit, if it ever comes here     
 		    syscall 
+
+	        .ktext  0x80000180      # kernel code   
+		
+	        sw     	$v0, s1     	# We need to use these registers     
+	        sw     	$a0, s2     	# Ignoring the stack
+
+	        mfc0 	$k0, $13     	# Cause register     
+	        srl     $a0, $k0, 2     # Extract   ExcCode     Field     
+	        andi    $a0, $a0, 0x1f  # Get the exception code     
+	        bne     $a0, $zero, kdone     # Exception Code 0 is I/O. 
