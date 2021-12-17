@@ -37,9 +37,18 @@ exit:
 	        bne     $a0, $zero, kdone     # Exception Code 0 is I/O.
     	    lui     $v0, 0xFFFF    	# $v0 =   0xFFFF0000     
 	        lw     	$a0, 4($v0)   	# get the input key     
-	        li 	    $v0,1     	# print it here.      
+	        li 	    $v0,1     	    # print it here.      
 	        syscall     		
 
 	        li      $v0,4     		# load print service call   
 	        la      $a0, n_line		# print the new line
 	        syscall  
+
+kdone:     
+        	lw     	$v0, s1     	# Restore other registers     
+	        lw     	$a0, s2     
+	        mtc0 	$0, $13     	# Clear Cause register     
+	        mfc0 	$k0, $12     	# Set Status register     
+	        ori     $k0, 0x11     	# Interrupts enabled     
+	        mtc0 	$k0, $12     	# write back to status     
+	        eret    		        # return to EPC  
