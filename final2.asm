@@ -57,3 +57,6 @@ kdone:
 exit:
 	li 	$v0, 10     	# exit, if it ever comes here     
 	syscall  
+
+
+
