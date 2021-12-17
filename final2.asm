@@ -19,3 +19,9 @@ main:
 		    lui     $t0, 0xFFFF     # $t0 =   0xFFFF0000     
 		    ori     $a0, $0, 2      # enable keyboard interrupt     
 		    sw     	$a0, 0($t0)     # write back to 0xFFFF0000
+
+here:   	j here     		        # stay here forever     
+		
+exit:
+		    li 	$v0, 10     	# exit, if it ever comes here     
+		    syscall 
