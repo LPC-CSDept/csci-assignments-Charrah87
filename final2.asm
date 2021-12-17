@@ -34,4 +34,12 @@ exit:
 	        mfc0 	$k0, $13     	# Cause register     
 	        srl     $a0, $k0, 2     # Extract   ExcCode     Field     
 	        andi    $a0, $a0, 0x1f  # Get the exception code     
-	        bne     $a0, $zero, kdone     # Exception Code 0 is I/O. 
+	        bne     $a0, $zero, kdone     # Exception Code 0 is I/O.
+    	    lui     $v0, 0xFFFF    	# $v0 =   0xFFFF0000     
+	        lw     	$a0, 4($v0)   	# get the input key     
+	        li 	    $v0,1     	# print it here.      
+	        syscall     		
+
+	        li      $v0,4     		# load print service call   
+	        la      $a0, n_line		# print the new line
+	        syscall  
